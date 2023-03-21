@@ -1,0 +1,32 @@
+subprojects {
+    apply plugin: 'java'
+    
+    java {
+    	sourceCompatibility = 17
+    	targetCompatibility = 17
+    }
+    
+    compileJava.options.encoding = 'UTF-8'
+    tasks.withType(JavaCompile) {
+ 	   options.encoding = 'UTF-8'
+	}
+    
+    repositories {
+        mavenCentral()
+    }
+    
+    dependencies {
+        if (project.name != 'common') {
+            implementation project(':common')
+        }
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+allprojects {
+    group = "es.makigas.ejemplos"
+}
